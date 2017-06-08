@@ -3,5 +3,7 @@ enum class Type {
     FOOD,
     HOUSE,
     ENTERTAINMENT,
-    EDUCATION
+    EDUCATION,
+    EARNED,
+    PASSIVE
 }

@@ -8,8 +8,10 @@ class TransactionExpression(val ex1: MoneyExpression,
             Type.CLOTHES -> return ClothesTransaction(first, second)
             Type.FOOD -> return FoodTransaction(first, second)
             Type.HOUSE -> return HouseTransaction(first, second)
-            Type.ENTERTAINMENT -> return EntertainmentTranscation(first, second)
+            Type.ENTERTAINMENT -> return EntertainmentTransaction(first, second)
             Type.EDUCATION -> return EducationTransaction(first, second)
+            Type.EARNED -> return EarnedTransaction(first, second)
+            Type.PASSIVE -> return PassiveTransaction(first, second)
             else -> throw IllegalArgumentException("")
         }
     }

@@ -16,6 +16,12 @@ class TransactionTypeExpression(val str: String) : Expression {
             "EDUCATION" -> {
                 return Type.EDUCATION
             }
+            "EARNED" -> {
+                return Type.EARNED
+            }
+            "PASSIVE" -> {
+                return Type.PASSIVE
+            }
             else -> {
                 throw IllegalArgumentException("Error while parsing string!")
             }

@@ -1,34 +1,40 @@
 val store = Store
 fun main(args: Array<String>) {
 
-
     while (true) {
-        val readLine = readLine()
+        readLine()?.let {
+            run(it)
+        }
+    }
+}
 
-
-        readLine?.let {
-            when {
-                it.startsWith("INCOME") -> {
-                    addIncome(it)
-                }
-                it.startsWith("WASTE") -> {
-                    addWaste(it)
-                }
-                it.startsWith("WALLET") -> {
-                    addWallet(it)
-                }
-                it.startsWith("WS")->{
-                    store.wallets.forEach { println(it.toString()) }
-                }
-                it.startsWith("TS")->{
-                    store.transaction.forEach { println(it.toString()) }
-                }
-                else -> {
-                    throw IllegalArgumentException("Error while parsing string")
-                }
+private fun run(it: String) {
+    try {
+        when {
+            it.startsWith("INCOME") -> {
+                addIncome(it)
+            }
+            it.startsWith("WASTE") -> {
+                addWaste(it)
+            }
+            it.startsWith("WALLET") -> {
+                addWallet(it)
+            }
+            it.startsWith("WS") -> {
+                store.wallets.forEach { println(it.toString()) }
+            }
+            it.startsWith("TS") -> {
+                store.transaction.forEach { println(it.toString()) }
+            }
+            it.startsWith("EXIT") -> {
+                System.exit(0)
+            }
+            else -> {
+                throw IllegalArgumentException("Error while parsing string")
             }
         }
-
+    } catch (e: Exception) {
+        println("Error!")
     }
 }
 
@@ -47,7 +53,7 @@ fun addWallet(string: String) {
 }
 
 fun addWaste(s: String) {
-    val split: List<List<String>> = s.split(",").map { s.split("=") }
+    val split: List<List<String>> = s.split(",").map { it.split("=") }
     val interpret = TransactionExpression(MoneyExpression(split[0][1]),
             TransactionTypeExpression(split[1][1]))
             .interpret()
@@ -55,12 +61,12 @@ fun addWaste(s: String) {
         val wallet: Wallet? = store.wallets.find { interpret.currency == it.currency }
         if (wallet != null) {
             if (wallet.amount!! > interpret.moneyAmount!!) {
-                wallet.amount = wallet.amount!!  - interpret.moneyAmount!!
+                wallet.amount = wallet.amount!! - interpret.moneyAmount!!
                 store.transaction.add(interpret)
-            }
-        }
-        else{
-            println("You dont have enough money!")
+                println(interpret.toString())
+            } else println("You dont have enough money!")
+        } else {
+            println("You dont have enough money or ${interpret.currency} wallet!")
         }
     } catch (e: IllegalArgumentException) {
         println(e.toString())
@@ -70,7 +76,23 @@ fun addWaste(s: String) {
 }
 
 fun addIncome(s: String) {
+    val split: List<List<String>> = s.split(",").map { it.split("=") }
+    val interpret = TransactionExpression(MoneyExpression(split[0][1]),
+            TransactionTypeExpression(split[1][1]))
+            .interpret()
 
+    try {
+        val wallet: Wallet? = store.wallets.find { interpret.currency == it.currency }
+        if (wallet != null) {
+            wallet.amount = wallet.amount!! + interpret.moneyAmount!!
+            store.transaction.add(interpret)
+            println(interpret.toString())
+        } else {
+            println("You dont have ${interpret.currency} wallet!")
+        }
+    } catch (e: IllegalArgumentException) {
+        println(e.toString())
+    }
 }
 
 
