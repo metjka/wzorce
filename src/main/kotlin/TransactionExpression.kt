@@ -1,5 +1,6 @@
-class TransactionExpression(val ex1: MoneyExpression,
-                            val ex2: TransactionTypeExpression
+class TransactionExpression(
+        val ex1: MoneyExpression,
+        val ex2: TransactionTypeExpression
 ) : Expression {
     override fun interpret(): Transaction {
         val (first, second) = ex1.interpret()
