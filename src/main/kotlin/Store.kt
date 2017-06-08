@@ -1,6 +1,6 @@
 object Store {
 
-    val transaction = mutableListOf<Bill>()
+    val transaction = mutableListOf<Transaction>()
     val wallets = mutableListOf<Wallet>()
 
 }

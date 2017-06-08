@@ -1,4 +1,4 @@
-abstract class Bill {
+abstract class Transaction {
 
     abstract var moneyAmount: Int?
     abstract var currency: String?
