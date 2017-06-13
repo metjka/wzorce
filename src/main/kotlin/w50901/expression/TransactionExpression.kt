@@ -1,3 +1,7 @@
+package w50901.expression
+
+import w50901.*
+
 class TransactionExpression(
         val ex1: MoneyExpression,
         val ex2: TransactionTypeExpression

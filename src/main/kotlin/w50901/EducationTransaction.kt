@@ -1,15 +1,15 @@
-import java.time.LocalTime
+package w50901
 
 class EducationTransaction(
         override var currency: String?,
         override var moneyAmount: Int?,
-        override var time: LocalTime? = LocalTime.now()) : Transaction() {
+        override var time: java.time.LocalTime? = java.time.LocalTime.now()) : Transaction() {
 
     override fun getMoney(): Int {
         return moneyAmount ?: 0
     }
 
     override fun toString(): String {
-        return "EducationTransaction: -" + super.toString()
+        return "w50901.EducationTransaction: -" + super.toString()
     }
 }

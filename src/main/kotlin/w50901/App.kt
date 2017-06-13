@@ -1,9 +1,13 @@
+package w50901
+
+import w50901.expression.*
+
 val store = Store
 fun main(args: Array<String>) {
 
     while (true) {
         readLine()?.let {
-            run(it)
+            w50901.run(it)
         }
     }
 }
@@ -12,19 +16,19 @@ private fun run(it: String) {
     try {
         when {
             it.startsWith("INCOME") -> {
-                addIncome(it)
+                w50901.addIncome(it)
             }
             it.startsWith("WASTE") -> {
-                addWaste(it)
+                w50901.addWaste(it)
             }
             it.startsWith("WALLET") -> {
-                addWallet(it)
+                w50901.addWallet(it)
             }
             it.startsWith("WS") -> {
-                store.wallets.forEach { println(it.toString()) }
+                Store.wallets.forEach { println(it.toString()) }
             }
             it.startsWith("TS") -> {
-                store.transaction.forEach { println(it.toString()) }
+                Store.transaction.forEach { println(it.toString()) }
             }
             it.startsWith("EXIT") -> {
                 System.exit(0)
@@ -45,11 +49,11 @@ fun addWallet(string: String) {
             StringExpression(split[1][1]))
             .interpret()
     try {
-        store.wallets.add(wallet)
+        Store.wallets.add(wallet)
     } catch (e: IllegalArgumentException) {
         println(e.toString())
     }
-    store.wallets.forEach { println(it.toString()) }
+    Store.wallets.forEach { println(it.toString()) }
 }
 
 fun addWaste(s: String) {
@@ -58,15 +62,15 @@ fun addWaste(s: String) {
             TransactionTypeExpression(split[1][1]))
             .interpret()
     try {
-        val wallet: Wallet? = store.wallets.find { interpret.currency == it.currency }
+        val wallet: Wallet? = Store.wallets.find { interpret.currency == it.currency }
         if (wallet != null) {
             if (wallet.amount!! > interpret.moneyAmount!!) {
                 wallet.amount = wallet.amount!! - interpret.moneyAmount!!
-                store.transaction.add(interpret)
+                Store.transaction.add(interpret)
                 println(interpret.toString())
-            } else println("You dont have enough money!")
+            } else println("You don`t have enough money!")
         } else {
-            println("You dont have enough money or ${interpret.currency} wallet!")
+            println("You don`t have enough money or ${interpret.currency} wallet!")
         }
     } catch (e: IllegalArgumentException) {
         println(e.toString())
@@ -82,13 +86,13 @@ fun addIncome(s: String) {
             .interpret()
 
     try {
-        val wallet: Wallet? = store.wallets.find { interpret.currency == it.currency }
+        val wallet: Wallet? = Store.wallets.find { interpret.currency == it.currency }
         if (wallet != null) {
             wallet.amount = wallet.amount!! + interpret.moneyAmount!!
-            store.transaction.add(interpret)
+            Store.transaction.add(interpret)
             println(interpret.toString())
         } else {
-            println("You dont have ${interpret.currency} wallet!")
+            println("You don`t have ${interpret.currency} wallet!")
         }
     } catch (e: IllegalArgumentException) {
         println(e.toString())

@@ -1,16 +1,16 @@
-import java.time.LocalTime
+package w50901
 
 class HouseTransaction(
         override var currency: String?,
         override var moneyAmount: Int? = 0,
-        override var time: LocalTime? = LocalTime.now()) : Transaction() {
+        override var time: java.time.LocalTime? = java.time.LocalTime.now()) : Transaction() {
 
     override fun getMoney(): Int {
         return moneyAmount ?: 0
     }
 
     override fun toString(): String {
-        return "HouseTransaction: -" + super.toString()
+        return "w50901.HouseTransaction: -" + super.toString()
     }
 
 }

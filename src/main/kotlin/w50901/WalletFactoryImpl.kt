@@ -1,19 +1,22 @@
-class WalletFactory(
+package w50901
+
+class WalletFactoryImpl(
         private var dollarWallet: DollarWallet,
         private var euroWallet: EuroWallet,
         private var zlotyWallet: ZlotyWallet
-) {
+) : WalletFactory {
 
-    fun createDollarWallet(): DollarWallet {
+    override fun createDollarWallet(): DollarWallet {
         return dollarWallet.clone()
     }
 
-    fun createEuroWallet(): EuroWallet {
+    override fun createEuroWallet(): EuroWallet {
         return euroWallet.clone()
     }
 
-    fun createZlotyWallet(): ZlotyWallet {
+    override fun createZlotyWallet(): ZlotyWallet {
         return zlotyWallet.clone()
     }
 
 }
+

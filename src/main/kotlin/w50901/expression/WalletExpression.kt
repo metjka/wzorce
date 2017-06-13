@@ -1,6 +1,11 @@
+package w50901.expression
+
+import w50901.DollarWallet
+import w50901.*
+
 class WalletExpression(val ex1: MoneyExpression, val ex2: StringExpression) : Expression {
 
-    val walletFactory = WalletFactory(
+    val walletFactory = WalletFactoryImpl(
             DollarWallet(),
             EuroWallet(),
             ZlotyWallet())

@@ -1,8 +1,10 @@
+package w50901
+
 class EuroWallet(override var amount: Int? = 0, override var name: String? = "Private") : Wallet() {
 
-    override var currency: String? = "€"
+    override val currency: String? = "€"
 
-    override fun clone(): EuroWallet {
+    override fun clone(): w50901.EuroWallet {
         return this
     }
 

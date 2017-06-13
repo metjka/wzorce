@@ -1,3 +1,5 @@
+package w50901.expression
+
 class TransactionTypeExpression(val str: String) : Expression {
     override fun interpret(): Type {
         when (str) {
